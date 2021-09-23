@@ -1,0 +1,25 @@
+{
+  "name": "outrun",
+  "author": "lotation",
+  "color": [
+    "#141817",
+    "#1c2220",
+    "#2b3331",
+    "#404b49",
+    "#5b6a66",
+    "#7b8e8a",
+    "#a0b9b3",
+    "#cae9e2",
+    "#da7797",
+    "#c1a079",
+    "#ad9171",
+    "#75a1bd",
+    "#b08bc1",
+    "#6caca0",
+    "#6caca0",
+    "#80bcb0"
+  ],
+  "foreground": "#b6d2cb",
+  "background": "#0b0f0e"
+}
+

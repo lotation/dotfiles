@@ -1,0 +1,17 @@
+cava
+discord
+flameshot
+htop
+i3-gaps (rounded corners patch)
+kitty
+mps-youtube
+neofetch
+nvim
+oomox/themix
+polybar
+rofi
+spicetify
+spotify
+vscodium
+wal
+zathura

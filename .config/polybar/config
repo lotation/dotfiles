@@ -1,0 +1,257 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[bar/fullbar]
+monitor = 
+include-file = ~/.config/polybar/fullbar
+
+
+; background = ${xrdb:background:#222}
+; foreground = ${xrdb:foreground:#222}
+; alert = ${xrdb:color3:#222}
+;background = #bb212121
+background = #0c0101
+;foreground = #FFE1FF
+foreground = #f2a0bf
+modules-left = i3 ;title 
+modules-center = mpd
+modules-right = memory cpu wlan eth pulseaudio-control updates date powermenu
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/archinfo]
+type = custom/text
+content = "  "
+click-left = kitty --class "archinfo" --name "archinfo" --title "archinfo" sh -c "neofetch; echo; echo Press ENTER to quit; read"
+content-padding = 0.5
+
+
+[module/i3]
+type = internal/i3
+pin-workspace = false
+index-sort = true
+
+enable-click = true
+enable-scroll = true
+wrapping-scroll = false
+reverse-scroll = false
+format = <label-state> <label-mode>
+
+label-focused = %name%
+label-focused-padding = 2
+; Old: label-focused-background = "#ff2e97" same for label-focused-underline
+;label-focused-background = "#f11851"
+;label-focused-foreground = "#484f7d"
+label-focused-background = "#F11851" 
+label-focused-underline  = "#F11851"
+
+label-unfocused = %name%
+label-unfocused-padding = 2
+
+label-visible = %name%
+label-visible-padding = 2
+
+label-mode = %mode%
+
+; Material theme
+label-mode-background = "#f07178"
+label-mode-foreground = "#212121"
+label-mode-padding = 2
+label-urgent = %name%
+label-urgent-padding = 2
+
+
+[module/separator]
+type = custom/text
+content =  
+content-padding = 1
+
+
+[module/title]
+type = internal/xwindow
+format = <label>
+label =  %title%
+label-maxlen = 20
+
+
+[module/mpd]
+type = internal/mpd
+interval = 2
+format-online = <toggle> <label-song> <icon-next>
+label-song = %artist% - %title%
+label-song-maxlen = 20
+label-song-ellipsis = true
+label-online = "MPD is offline"
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+format-padding = 1
+
+
+[module/memory]
+type = internal/memory
+format = <label>
+label =  %mb_used%
+format-padding = 1
+
+
+[module/cpu]
+type = internal/cpu
+format =  <label>%
+label = %percentage%
+format-padding = 1
+
+
+[module/temperature]
+type = internal/temperature
+interval = 0
+thermal-zone = 9
+warn-temperature = 80
+format = <label>
+label =  %temperature-c%
+format-warn = <label-warn>
+label-warn =  %temperature-c%
+format-padding = 1
+
+
+[module/wlan]
+type = internal/network
+interface = wlp4s0
+interval = 5
+; label-connected = 直 %essid%
+label-connected = 直 
+label-disconnected = 睊
+format-padding = 1
+
+
+[module/eth]
+type = internal/network
+interface = enp6s0
+interval = 5
+;format-connected = <label-connected>
+;format-connected-prefix = ""
+label-connected =  %downspeed:9%
+;format-disconnected = <label-disconnected>
+label-disconnected = 󰂭
+format-padding = 1
+
+
+[module/pulseaudio-control]
+type = custom/script
+tail = true
+exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description" --sink-nickname "alsa_output.pci-0000_0c_00.1.hdmi-stereo-extra4: - ﰝ   Speakers" --sink-nickname "alsa_output.pci-0000_0c_00.1.hdmi-stereo: - ﰝ   Speakers" --sink-nickname "alsa_output.pci-0000_0e_00.4.iec958-stereo.monitor: Unknown" --sink-nickname "alsa_output.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.analog-stereo: -    Headphones" --sink-nickname "alsa_output.pci-0000_0e_00.4.analog-stereo: -    Sony" listen
+click-right  = exec pavucontrol &
+click-left   = pulseaudio-control togmute
+click-middle = pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-sink
+scroll-up   = pulseaudio-control --volume-max 130 up
+scroll-down = pulseaudio-control --volume-max 130 down
+format-padding= 1
+
+;[module/volume]
+;type = internal/alsa
+;format-volume = <ramp-volume>  <label-volume>
+;format-muted = ﱝ  Muted
+;ramp-volume-0 = 
+;ramp-volume-1 = 奔
+;ramp-volume-2 = 墳
+;format-padding = 0
+
+;[module/volume]
+;type = internal/pulseaudio
+;format-volume = <ramp-volume> <label-volume>
+;label-volume = %percentage%%
+;label-muted = ﱝ  Muted
+;ramp-volume-0 = 
+;ramp-volume-1 = 奔
+;ramp-volume-2 = 墳
+;format-padding = 0
+
+[module/updates]
+type = custom/script
+exec = sudo -u lotation ~/.config/polybar/updates.sh
+tail = true
+interval = 10
+format-padding = 1
+
+
+;[module/notifications]
+;type = custom/text
+;content = 
+;click-left = kill -s USR1 $(pidof deadd-notification-center)
+
+
+[module/menu]
+type = custom/text
+content =   
+click-left = ~/.config/rofi/launchers-git/launcher.sh &
+content-padding = 1
+
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = ACAD
+poll-interval = 2
+format-discharging =   <label-discharging>%
+format-full =  <label-full>% 
+format-charging =   <label-charging>% 
+label-charging = %percentage%
+label-discharging =  %percentage%
+label-full =  Fully Charged
+time-format = %H:%M
+
+
+[module/date]
+type = internal/date
+interval = 60
+date = %a %d %b
+time = %l:%M %p
+label =   %date%     %time%
+;label =  %time%
+format-padding = 1
+
+
+[module/powermenu]
+type = custom/menu
+
+expand-left = true
+
+;menu-0-0 =󰍃 Logout
+menu-0-0 =󰍃 
+menu-0-0-exec = i3-msg exit
+;menu-0-1 =󰍁 Lock
+menu-0-1 =󰍁 
+menu-0-1-exec = betterlockscreen -l dim
+;menu-0-2 =󰤄 Suspend
+menu-0-2 =󰤄 
+menu-0-2-exec = systemctl suspend
+;menu-0-3 =  Reboot
+menu-0-3 =  
+menu-0-3-exec = systemctl reboot
+;menu-0-4 = 襤 Poweroff
+menu-0-4 = 襤 
+menu-0-4-exec = systemctl poweroff
+format-spacing = 1 
+format-padding = 1
+
+label-open = 襤
+label-close = 
+label-separator = |

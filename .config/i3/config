@@ -1,0 +1,244 @@
+##### i3 config / lotation  #######################
+
+##### GENERAL ##################################### 
+
+set $mod Mod4
+
+font pango:Fira Code 10
+
+# APP VARIABLES
+set $browser	google-chrome-stable
+set $music  	spotify
+set $term   	kitty
+set $editor 	vscodium
+
+# DIR VARIABLES
+set $bin ~/bin
+
+# RESIZE VARIABLES
+set $center move absolute position center
+
+# FLOATING
+floating_modifier $mod
+
+set $thick 18
+border_radius 4
+
+# DEFAULT BORDER
+for_window [class="^.*"]  border pixel 0
+for_window [title="^.*"]  border pixel 0
+for_window [class="nvim"] set $thick 0
+
+# APPLICATION BORDERS
+#for_window [class="kitty"] border pixel $thick
+
+# FLOATING APPLICATIONS
+for_window [class="ffplay"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="archinfo"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="About"] floating enable
+
+# GAP VARIABLES
+set $inner 16 
+set $outer 0
+
+# SET GAPS
+gaps inner $inner
+gaps outer $outer
+
+# KILL
+bindsym $mod+Shift+q kill
+
+# RELOAD 
+bindsym $mod+Shift+c reload
+
+# RESTART
+bindsym $mod+Shift+r restart
+
+title_align center
+
+##### MOVEMENT ####################################
+
+# FOCUS
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+ograve focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# MOVE
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# RESIZE
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym ograve resize grow width 5 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# VERTICAL SPLIT
+bindsym $mod+v split v
+
+# HORIZONTAL SPLIT
+bindsym $mod+h split h
+
+# FULLSCREEN
+bindsym $mod+f fullscreen toggle
+
+# TOGGLE FLOATING
+bindsym $mod+space floating mode_toggle
+
+# MODE TOGGLE
+bindsym $mod+Ctrl+space floating toggle
+
+# PAPER MODE
+bindsym $mod+Shift+space floating toggle; resize 100px 975px; $center
+
+# CENTER FLOATING
+bindsym $mod+c $center
+
+##### WORKSPACES ##################################
+
+# WORKSPACES
+set $ws1 "1: "
+set $ws2 "2: " 
+set $ws3 "3: 󰨞"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6: "
+set $ws7 "7: ﭮ"
+set $ws8 "8: 󰔁"
+set $ws9 "9: "
+set $ws10 "10"
+
+# SWITCH TO WORKSPACE
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# MOVE WINDOW TO WORKSPACE
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# ASSIGN CERTAIN APPLICATIONS TO THEIR WORKSPACES
+assign [class="Google-chrome"] 		number $ws2
+assign [class="vscodium"] 		    number $ws3
+assign [class="TelegramDesktop"] 	number $ws8
+assign [class="discord"]		    number $ws7
+assign [class="Minecraft* 1.16.4"] 	number $ws6
+for_window [class="Minecraft* 1.16.4"] 	move container to workspace $ws6
+for_window [class="Spotify"] 		    move container to workspace $ws9
+
+##### COLORS #######################################
+
+# XRESOURCES
+#set_from_resource $fg foreground
+#set_from_resource $bg background
+set $fg #ECEFF4
+set $bg #161130
+
+# CLASS                 BORDER  BG      TEXT    INDICATOR     CHILD_BORDER
+client.focused          $bg     $bg     $fg     $bg           $bg
+client.focused_inactive $bg     $bg     $fg     $bg           $bg
+client.unfocused        $bg     $bg     $fg     $bg           $bg
+client.urgent           $bg     $bg     $fg     $bg           $bg
+client.placeholder      $bg     $bg     $fg     $bg           $bg
+client.background       $bg
+
+
+##### TOOLS ########################################
+
+# SCREENSHOT
+set $shots ~/Pictures/screen
+#bindsym $mod+Print exec import $shots/$(date +%s).png
+#bindsym $mod+Shift+Print exec feh $(last $shots)
+bindsym $mod+x exec flameshot gui
+
+# MEDIA CONTROLS
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -3%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +3%
+#bindsym XF86AudioMicMute 
+
+# ADVANCES CONTROLS
+#bindsym XF86WLAN
+#bindsym XF86Tools
+
+# ROFI
+bindsym $mod+q exec ~/.config/rofi/launch.sh
+
+# LOCK
+exec betterlockscreen -u ~/Pictures/lofi.png
+bindsym $mod+Shift+x exec betterlockscreen -l dim
+
+# SUSPEND
+bindsym $mod+Shift+s exec flameshot gui
+
+##### APP BINDS ###################################
+
+bindsym $mod+n        	exec $browser
+#bindsym $mod+m        	exec $music
+bindsym $mod+i        	exec $editor
+bindsym $mod+Return 	exec $term
+bindsym $mod+m          exec ytfzf -D -m 
+
+##### LAUNCH ###################################### 
+
+# STARTUP
+exec kitty --class "motd" --name "motd" --title "motd" sh -c "clear; sleep 3; motd; echo; echo Press ENTER to quit; read"
+exec --no-startup-id nm-applet
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id wal -i ~/Pictures/lofi.png
+
+# RELOAD
+exec_always --no-startup-id picom -b
+exec_always --no-startup-id dunst
+#exec_always xrdb -merge ~/.Xresoureces 
