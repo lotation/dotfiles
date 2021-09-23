@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Minecraft Server
+GenericName=Server
+Icon=network-wired
+Exec=/home/lotation/Games/Minecraft/server/start.sh
+Path=/home/lotation/Games/Minecraft/server/
+Terminal=true
+StartupWMClass=Minecraft_Server
+StartupNotify=false

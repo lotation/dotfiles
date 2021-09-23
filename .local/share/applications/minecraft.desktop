@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Minecraft Launcher
+GenericName=Launcher
+Icon=/home/lotation/Pictures/icons/minecraft.png
+Exec=java -jar /home/lotation/Downloads/ShiginimaSE_v4400/linux_osx/Shiginima_Launcher_SE.v4400.jar
+Path=/home/lotation/.minecraft/
+Terminal=false
+StartupWMClass=Minecraft_Launcher
+StartupNotify=false
